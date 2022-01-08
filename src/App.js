@@ -280,7 +280,7 @@ function App() {
           streakUpdated.current = false
         }}
       >
-        Play Again
+        שחק שוב
       </button>
     )
   }
@@ -323,12 +323,12 @@ function App() {
           {gameState === state.won && (
             <>
               <img src={Success} alt="success" height="auto" width="auto" />
-              <h1 className="text-primary text-3xl">Congrats!</h1>
-              <p className="mt-6">
-                Current streak: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
+              <h1 className="text-primary text-3xl rtl">כל הכבוד!</h1>
+              <p className="mt-6 rtl">
+                רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
               </p>
-              <p>
-                Longest streak: <strong>{longestStreak}</strong>
+              <p className="rtl">
+                הרצף הכי ארוך: <strong>{longestStreak}</strong>
               </p>
             </>
           )}
@@ -336,15 +336,15 @@ function App() {
             <>
               <img src={Fail} alt="success" height="auto" width="80%" />
               <div className="text-primary text-4xl text-center">
-                <p>Oops!</p>
-                <p className="mt-3 text-2xl">
-                  The word was <strong>{answer}</strong>
+                <p className="rtl">לא נורא</p>
+                <p className="mt-3 text-2xl rtl">
+                  המילה הייתה <strong>{answer}</strong>.
                 </p>
-                <p className="mt-6 text-base">
-                  Current streak: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
+                <p className="mt-6 text-base rtl">
+                  רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
                 </p>
-                <p className="text-base">
-                  Longest streak: <strong>{longestStreak}</strong>
+                <p className="text-base rtl">
+                  הרצף הכי ארוך: <strong>{longestStreak}</strong>
                 </p>
               </div>
             </>
