@@ -167,7 +167,7 @@ function App() {
 
     setBoard((prev) => {
       const newBoard = [...prev]
-      newBoard[currentRow][currentCol - 1] = ''
+      newBoard[currentRow][5 - currentCol] = ''
       return newBoard
     })
 
@@ -184,7 +184,6 @@ function App() {
       if (lastLetter in final_form_letters){
         answerLetters[0] = final_form_letters[lastLetter]
       }
-
 
       // set all to gray
       for (let i = 0; i < wordLength; i++) {
