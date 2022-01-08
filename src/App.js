@@ -189,10 +189,15 @@ function App() {
       newCellStatuses[rowNumber] = [...prev[rowNumber]]
       const wordLength = word.length
       let answerLetters = answer.split("")
-      const lastLetter = answerLetters[0]
-      if (lastLetter in finalFormLetters){
-        answerLetters[0] = finalFormLetters[lastLetter]
+      const answerLastLetter = answerLetters[0]
+      if (answerLastLetter in finalFormLetters){
+        answerLetters[0] = finalFormLetters[answerLastLetter]
       }
+      let wordLetters = word.split("")
+      let wordLastLetter = wordLetters[0]
+      if (wordLastLetter in finalFormLetters) {
+        wordLetters[0] = finalFormLetters[wordLastLetter]
+      }      
 
       // set all to gray
       for (let i = 0; i < wordLength; i++) {
@@ -201,7 +206,7 @@ function App() {
 
       // check greens
       for (let i = wordLength - 1; i >= 0; i--) {
-        if (word[i] === answer[i]) {
+        if (wordLetters[i] === answerLetters[i]) {
           newCellStatuses[rowNumber][i] = status.green
           answerLetters.splice(i, 1)
         }
@@ -209,7 +214,7 @@ function App() {
 
       // check yellows
       for (let i = wordLength - 1; i >= 0; i--) {
-        if (answerLetters.includes(word[i]) && newCellStatuses[rowNumber][i] !== status.green) {
+        if (answerLetters.includes(wordLetters[i]) && newCellStatuses[rowNumber][i] !== status.green) {
           newCellStatuses[rowNumber][i] = status.yellow
           answerLetters.splice(answerLetters.indexOf(word[i]), 1)
         }
@@ -249,14 +254,21 @@ function App() {
         if (letter in invertedFinalFormLetters){
           finalFormLetter = invertedFinalFormLetters[letter]
         }
+        let normalFormLetter = letter;
+        if (letter in finalFormLetters){
+          normalFormLetter = finalFormLetters[letter]
+        }
         if (newLetterStatuses[letter] === status.green) continue
 
-        if (letter === answer[i]) {
-          newLetterStatuses[letter] = status.green
-        } else if (answer.includes(letter) || (answer.includes(finalFormLetter))) {
-          newLetterStatuses[letter] = status.yellow
+        if ((letter === answer[i]) || (finalFormLetter === answer[i])) {
+          newLetterStatuses[normalFormLetter] = status.green
+          newLetterStatuses[finalFormLetter] = status.green
+        } else if (answer.includes(normalFormLetter) || answer.includes(finalFormLetter)) {
+          newLetterStatuses[normalFormLetter] = status.yellow
+          newLetterStatuses[finalFormLetter] = status.yellow
         } else {
-          newLetterStatuses[letter] = status.gray
+          newLetterStatuses[normalFormLetter] = status.gray
+          newLetterStatuses[finalFormLetter] = status.gray
         }
       }
       return newLetterStatuses
