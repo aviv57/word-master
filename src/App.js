@@ -23,6 +23,14 @@ function reverse(s) {
   return [...s].reverse().join("");
 }
 
+const final_form_letters = {
+                             'ך': 'כ',
+                             'ם': 'מ',
+                             'ן': 'נ',
+                             'ף': 'פ',
+                             'ץ': 'צ'
+                            }
+
 const getRandomAnswer = () => {
   const randomIndex = Math.floor(Math.random() * answers.length)
   return reverse(answers[randomIndex].toUpperCase())
@@ -171,7 +179,12 @@ function App() {
       const newCellStatuses = [...prev]
       newCellStatuses[rowNumber] = [...prev[rowNumber]]
       const wordLength = word.length
-      const answerLetters = answer.split("");
+      let answerLetters = answer.split("")
+      const lastLetter = answerLetters[0]
+      if (lastLetter in final_form_letters){
+        answerLetters[0] = final_form_letters[lastLetter]
+      }
+
 
       // set all to gray
       for (let i = 0; i < wordLength; i++) {
