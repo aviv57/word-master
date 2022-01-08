@@ -23,13 +23,22 @@ function reverse(s) {
   return [...s].reverse().join("");
 }
 
-const final_form_letters = {
+function invert(json) {
+  var ret = {};
+  for (var key in json) {
+    ret[json[key]] = key;
+  }
+  return ret;
+}
+
+const finalFormLetters = {
                              'ך': 'כ',
                              'ם': 'מ',
                              'ן': 'נ',
                              'ף': 'פ',
                              'ץ': 'צ'
                             }
+const invertedFinalFormLetters = invert(finalFormLetters)                            
 
 const getRandomAnswer = () => {
   const randomIndex = Math.floor(Math.random() * answers.length)
@@ -181,8 +190,8 @@ function App() {
       const wordLength = word.length
       let answerLetters = answer.split("")
       const lastLetter = answerLetters[0]
-      if (lastLetter in final_form_letters){
-        answerLetters[0] = final_form_letters[lastLetter]
+      if (lastLetter in finalFormLetters){
+        answerLetters[0] = finalFormLetters[lastLetter]
       }
 
       // set all to gray
@@ -235,14 +244,19 @@ function App() {
       const newLetterStatuses = { ...prev }
       const wordLength = word.length
       for (let i = 0; i < wordLength; i++) {
-        if (newLetterStatuses[word[i]] === status.green) continue
+        let letter = word[i]
+        let finalFormLetter = letter;
+        if (letter in invertedFinalFormLetters){
+          finalFormLetter = invertedFinalFormLetters[letter]
+        }
+        if (newLetterStatuses[letter] === status.green) continue
 
-        if (word[i] === answer[i]) {
-          newLetterStatuses[word[i]] = status.green
-        } else if (answer.includes(word[i])) {
-          newLetterStatuses[word[i]] = status.yellow
+        if (letter === answer[i]) {
+          newLetterStatuses[letter] = status.green
+        } else if (answer.includes(letter) || (answer.includes(finalFormLetter))) {
+          newLetterStatuses[letter] = status.yellow
         } else {
-          newLetterStatuses[word[i]] = status.gray
+          newLetterStatuses[letter] = status.gray
         }
       }
       return newLetterStatuses
