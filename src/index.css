@@ -36,6 +36,7 @@ html {
   max-height: -webkit-fill-available;
 }
 
-.font-righteous {
-  font-family: 'Righteous', cursive;
+.rtl {
+  direction: rtl;
+  text-align: right;
 }
