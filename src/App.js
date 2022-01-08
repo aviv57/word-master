@@ -225,6 +225,7 @@ function App() {
     if (lastFilledRow && isRowAllGreen(lastFilledRow)) {
       setGameState(state.won)
     } else if (currentRow === 6) {
+      setAnswer(reverse(answer))
       setGameState(state.lost)
     }
   }, [cellStatuses, currentRow])
