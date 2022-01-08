@@ -19,9 +19,13 @@ const state = {
   lost: 'lost',
 }
 
+function reverse(s) {
+  return [...s].reverse().join("");
+}
+
 const getRandomAnswer = () => {
   const randomIndex = Math.floor(Math.random() * answers.length)
-  return answers[randomIndex].toUpperCase()
+  return reverse(answers[randomIndex].toUpperCase())
 }
 
 function App() {
@@ -121,7 +125,7 @@ function App() {
         return prev
       }
       const newBoard = [...prev]
-      newBoard[currentRow][currentCol] = letter
+      newBoard[currentRow][4 - currentCol] = letter
       return newBoard
     })
     if (currentCol < 5) {
@@ -131,7 +135,7 @@ function App() {
 
   const isValidWord = (word) => {
     if (word.length < 5) return false
-    return words[word.toLowerCase()]
+    return words[reverse(word.toLowerCase())]
   }
 
   const onEnterPress = () => {
@@ -183,7 +187,7 @@ function App() {
       }
 
       // check yellows
-      for (let i = 0; i < wordLength; i++) {
+      for (let i = wordLength - 1; i >= 0; i--) {
         if (answerLetters.includes(word[i]) && newCellStatuses[rowNumber][i] !== status.green) {
           newCellStatuses[rowNumber][i] = status.yellow
           answerLetters.splice(answerLetters.indexOf(word[i]), 1)
