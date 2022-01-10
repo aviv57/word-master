@@ -16,8 +16,8 @@ export const SettingsModal = ({ isOpen, handleClose, styles, darkMode, toggleDar
         <div
           className={`h-full flex flex-col items-center justify-center max-w-[390px] mx-auto pt-9 text-primary dark:text-primary-dark `}
         >
-          <h1 className="text-center mb-4 sm:text-3xl text-2xl">Settings</h1>
-          <div className="flex-1 w-full border-b border-slate-400 mb-4">
+          <h1 className="text-center mb-4 sm:text-3xl text-2xl rtl">הגדרות</h1>
+          <div className="flex-1 w-full border-slate-400 mb-4">
             <button
               className="absolute top-4 right-4 rounded-full nm-flat-background dark:nm-flat-background-dark text-primary dark:text-primary-dark p-1 w-6 h-6 sm:p-2 sm:h-8 sm:w-8 hover:nm-inset-background dark:hover:nm-inset-background-dark"
               onClick={handleClose}
@@ -38,11 +38,11 @@ export const SettingsModal = ({ isOpen, handleClose, styles, darkMode, toggleDar
                 <span
                   aria-hidden="true"
                   className={`${
-                    darkMode ? 'translate-x-[1.55rem]' : 'translate-x-0'
+                    darkMode ? 'translate-x-[1.55rem] rtl' : 'translate-x-0 rtl'
                   } absolute pointer-events-none inline-block top-1/2 -translate-y-1/2 h-5 w-5 shadow rounded-full bg-white transform ring-0 transition ease-in-out duration-200`}
                 />
               </Switch>
-              <Switch.Label as="span" className="ml-3 cursor-pointer">
+              <Switch.Label as="span" className="ml-3 cursor-pointer rtl">
                 Dark Mode
               </Switch.Label>
             </Switch.Group>
@@ -71,30 +71,6 @@ export const SettingsModal = ({ isOpen, handleClose, styles, darkMode, toggleDar
                 ))}
               </div>
             </RadioGroup>*/}
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="mb-4">
-              If you're enjoying this game, you can show your support by{' '}
-              <a
-                href="https://www.buymeacoffee.com/katherinecodes"
-                target="_blank"
-                rel="noreferrer"
-              >
-                buying me a coffee
-              </a>
-              <span className="ml-1 text-xs">💛</span>
-            </div>
-            <a
-              href="https://www.buymeacoffee.com/katherinecodes"
-              target="_blank"
-              rel="noreferrer"
-              className="nm-flat-background dark:nm-flat-background-dark rounded-xl hover:nm-inset-background dark:hover:nm-inset-background-dark"
-            >
-              <img
-                alt="buy me a coffee"
-                src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=katherinecodes&button_colour=eab308&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
-              />
-            </a>
           </div>
         </div>
       </div>
