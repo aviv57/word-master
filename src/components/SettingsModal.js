@@ -25,26 +25,26 @@ export const SettingsModal = ({ isOpen, handleClose, styles, darkMode, toggleDar
               <Close />
             </button>
 
-            <Switch.Group as="div" className="flex items-center">
+            <Switch.Group as="div" className="absolute right-10">
+              <Switch.Label as="span" className="mr-3 cursor-pointer">
+                Dark Mode
+              </Switch.Label>
               <Switch
                 checked={darkMode}
                 onChange={toggleDarkMode}
                 className={`${
                   darkMode
-                    ? 'nm-inset-yellow-500 border-background-dark'
-                    : 'nm-inset-background border-transparent'
-                } relative inline-flex flex-shrink-0 h-8 w-14 p-1 border-2 rounded-full cursor-pointer transition ease-in-out duration-200`}
+                  ? 'nm-inset-yellow-500 border-background-dark'
+                  : 'nm-inset-background border-transparent'
+                } relative inline-flex flex-shrink-0 h-8 w-14 p-1 border-2 rounded-full cursor-pointer transition ease-in-out duration-200 right`}
               >
                 <span
                   aria-hidden="true"
                   className={`${
-                    darkMode ? 'translate-x-[1.55rem] rtl' : 'translate-x-0 rtl'
+                    darkMode ? 'translate-x-[1.55rem]' : 'translate-x-0'
                   } absolute pointer-events-none inline-block top-1/2 -translate-y-1/2 h-5 w-5 shadow rounded-full bg-white transform ring-0 transition ease-in-out duration-200`}
                 />
               </Switch>
-              <Switch.Label as="span" className="ml-3 cursor-pointer rtl">
-                Dark Mode
-              </Switch.Label>
             </Switch.Group>
 
             {/*

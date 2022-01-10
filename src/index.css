@@ -38,3 +38,7 @@ html {
   direction: rtl;
   text-align: right;
 }
+
+.flex-end{
+  align-items: end;
+}
