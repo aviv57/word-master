@@ -1,17 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
 import { letters, status } from './constants'
-import { Keyboard } from './Keyboard'
+import { Keyboard } from './components/Keyboard'
 import answers from './data/answers'
 import words from './data/words'
-import Modal from 'react-modal'
-import Success from './data/Success.png'
-import Fail from './data/Cross.png'
-import { useLocalStorage } from './hooks/useLocalStorage'
-import { ReactComponent as Github } from './data/Github.svg'
-import { ReactComponent as Close } from './data/Close.svg'
-import { ReactComponent as Info } from './data/Info.svg'
 
-Modal.setAppElement('#root')
+import { useLocalStorage } from './hooks/useLocalStorage'
+import { ReactComponent as Info } from './data/Info.svg'
+import { ReactComponent as Settings } from './data/Settings.svg'
+
+import { InfoModal } from './components/InfoModal'
+import { SettingsModal } from './components/SettingsModal'
+import { EndGameModal } from './components/EndGameModal'
 
 const state = {
   playing: 'playing',
@@ -82,6 +81,7 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [firstTime, setFirstTime] = useLocalStorage('first-time', true)
   const [infoModalIsOpen, setInfoModalIsOpen] = useState(firstTime)
+  const [settingsModalIsOpen, setSettingsModalIsOpen] = useState(false)
 
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
@@ -89,6 +89,9 @@ function App() {
     setFirstTime(false)
     setInfoModalIsOpen(false)
   }
+
+  const [darkMode, setDarkMode] = useLocalStorage('dark-mode', false)
+  const toggleDarkMode = () => setDarkMode((prev) => !prev)
 
   useEffect(() => {
     if (gameState !== state.playing) {
@@ -116,11 +119,11 @@ function App() {
   const getCellStyles = (rowNumber, colNumber, letter) => {
     if (rowNumber === currentRow) {
       if (letter) {
-        return `nm-inset-background text-primary ${
+        return `nm-inset-background dark:nm-inset-background-dark text-primary dark:text-primary-dark ${
           submittedInvalidWord ? 'border border-red-800' : ''
         }`
       }
-      return 'nm-flat-background text-primary'
+      return 'nm-flat-background dark:nm-flat-background-dark text-primary dark:text-primary-dark'
     }
 
     switch (cellStatuses[rowNumber][colNumber]) {
@@ -131,7 +134,7 @@ function App() {
       case status.gray:
         return 'nm-inset-n-gray text-gray-50'
       default:
-        return 'nm-flat-background text-primary'
+        return 'nm-flat-background dark:nm-flat-background-dark text-primary dark:text-primary-dark'
     }
   }
 
@@ -188,7 +191,7 @@ function App() {
       const newCellStatuses = [...prev]
       newCellStatuses[rowNumber] = [...prev[rowNumber]]
       const wordLength = word.length
-      let answerLetters = answer.split("")
+      let answerLetters = answer.split('')
       const answerLastLetter = answerLetters[0]
       if (answerLastLetter in finalFormLetters){
         answerLetters[0] = finalFormLetters[answerLastLetter]
@@ -275,191 +278,122 @@ function App() {
     })
   }
 
-  const PlayAgainButton = () => {
-    return (
-      <button
-        type="button"
-        className="rounded-lg px-6 py-2 mt-8 text-lg nm-flat-background hover:nm-inset-background"
-        onClick={() => {
-          setAnswer(initialStates.answer)
-          setGameState(initialStates.gameState)
-          setBoard(initialStates.board)
-          setCellStatuses(initialStates.cellStatuses)
-          setCurrentRow(initialStates.currentRow)
-          setCurrentCol(initialStates.currentCol)
-          setLetterStatuses(initialStates.letterStatuses)
-          closeModal()
-          streakUpdated.current = false
-        }}
-      >
-        שחק שוב
-      </button>
-    )
+  const modalStyles = {
+    overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: darkMode ? 'hsl(231, 16%, 25%)' : 'hsl(231, 16%, 92%)',
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      height: 'calc(100% - 2rem)',
+      width: 'calc(100% - 2rem)',
+      backgroundColor: darkMode ? 'hsl(231, 16%, 25%)' : 'hsl(231, 16%, 92%)',
+      boxShadow: `${
+        darkMode
+          ? '0.2em 0.2em calc(0.2em * 2) #252834, calc(0.2em * -1) calc(0.2em * -1) calc(0.2em * 2) #43475C'
+          : '0.2em 0.2em calc(0.2em * 2) #A3A7BD, calc(0.2em * -1) calc(0.2em * -1) calc(0.2em * 2) #FFFFFF'
+      }`,
+      border: 'none',
+      borderRadius: '1rem',
+      maxWidth: '475px',
+      maxHeight: '650px',
+      position: 'relative',
+    },
   }
 
   return (
-    <div className="flex flex-col justify-between h-fill bg-background">
-      <header className="flex items-center py-2 px-3 text-primary">
-        <h1 className="flex-1 text-center text-xl xxs:text-2xl -mr-6 sm:text-4xl tracking-wide font-bold">
-          בול במילה
-        </h1>
-        <button type="button" onClick={() => setInfoModalIsOpen(true)}>
-          <Info />
-        </button>
-      </header>
-      <div className="flex items-center flex-col py-3">
-        <div className="grid grid-cols-5 grid-flow-row gap-4">
-          {board.map((row, rowNumber) =>
-            row.map((letter, colNumber) => (
-              <span
-                key={colNumber}
-                className={`${getCellStyles(
-                  rowNumber,
-                  colNumber,
-                  letter
-                )} inline-flex items-center justify-center text-lg font-medium w-[14vw] h-[14vw] xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full`}
-              >
-                {letter}
-              </span>
-            ))
-          )}
+    <div className={darkMode ? 'dark' : ''}>
+      <div className={`flex flex-col justify-between h-fill bg-background dark:bg-background-dark`}>
+        <header className="flex items-center py-2 px-3 text-primary dark:text-primary-dark">
+          <button
+            type="button"
+            onClick={() => setSettingsModalIsOpen(true)}
+            className="p-1 rounded-full"
+          >
+            <Settings />
+          </button>
+          <h1 className="flex-1 text-center text-xl xxs:text-2xl sm:text-4xl tracking-wide font-bold">
+            בול במילה
+          </h1>
+          <button
+            type="button"
+            onClick={() => setInfoModalIsOpen(true)}
+            className="p-1 rounded-full"
+          >
+            <Info />
+          </button>
+        </header>
+        <div className="flex items-center flex-col py-3">
+          <div className="grid grid-cols-5 grid-flow-row gap-4">
+            {board.map((row, rowNumber) =>
+              row.map((letter, colNumber) => (
+                <span
+                  key={colNumber}
+                  className={`${getCellStyles(
+                    rowNumber,
+                    colNumber,
+                    letter
+                  )} inline-flex items-center font-medium justify-center text-lg w-[14vw] h-[14vw] xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-full`}
+                >
+                  {letter}
+                </span>
+              ))
+            )}
+          </div>
         </div>
+        <InfoModal
+          isOpen={infoModalIsOpen}
+          handleClose={handleInfoClose}
+          darkMode={darkMode}
+          styles={modalStyles}
+        />
+        <EndGameModal
+          isOpen={modalIsOpen}
+          handleClose={closeModal}
+          styles={modalStyles}
+          darkMode={darkMode}
+          gameState={gameState}
+          state={state}
+          currentStreak={currentStreak}
+          longestStreak={longestStreak}
+          answer={answer}
+          playAgain={() => {
+            setAnswer(initialStates.answer)
+            setGameState(initialStates.gameState)
+            setBoard(initialStates.board)
+            setCellStatuses(initialStates.cellStatuses)
+            setCurrentRow(initialStates.currentRow)
+            setCurrentCol(initialStates.currentCol)
+            setLetterStatuses(initialStates.letterStatuses)
+            closeModal()
+            streakUpdated.current = false
+          }}
+        />
+        <SettingsModal
+          isOpen={settingsModalIsOpen}
+          handleClose={() => setSettingsModalIsOpen(false)}
+          styles={modalStyles}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+        <Keyboard
+          letterStatuses={letterStatuses}
+          addLetter={addLetter}
+          onEnterPress={onEnterPress}
+          onDeletePress={onDeletePress}
+          gameDisabled={gameState !== state.playing}
+        />
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Game End Modal"
-      >
-        <div className="h-full flex flex-col items-center justify-center max-w-[300px] mx-auto">
-          {gameState === state.won && (
-            <>
-              <img src={Success} alt="success" height="auto" width="auto" />
-              <h1 className="text-primary text-3xl rtl">כל הכבוד!</h1>
-              <p className="mt-6 rtl">
-                רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
-              </p>
-              <p className="rtl">
-                הרצף הכי ארוך: <strong>{longestStreak}</strong>
-              </p>
-            </>
-          )}
-          {gameState === state.lost && (
-            <>
-              <img src={Fail} alt="success" height="auto" width="80%" />
-              <div className="text-primary text-4xl text-center">
-                <p className="rtl">לא נורא</p>
-                <p className="mt-3 text-2xl rtl">
-                  המילה הייתה <strong>{answer}</strong>.
-                </p>
-                <p className="mt-6 text-base rtl">
-                  רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
-                </p>
-                <p className="text-base rtl">
-                  הרצף הכי ארוך: <strong>{longestStreak}</strong>
-                </p>
-              </div>
-            </>
-          )}
-          <PlayAgainButton />
-        </div>
-      </Modal>
-      <Keyboard
-        letterStatuses={letterStatuses}
-        addLetter={addLetter}
-        onEnterPress={onEnterPress}
-        onDeletePress={onDeletePress}
-        gameDisabled={gameState !== state.playing}
-      />
-      <Modal
-        isOpen={infoModalIsOpen}
-        onRequestClose={handleInfoClose}
-        style={customStyles}
-        contentLabel="Game Info Modal"
-      >
-        <button
-          className="absolute top-4 right-4 rounded-full nm-flat-background text-primary p-1 w-6 h-6 sm:p-2 sm:h-8 sm:w-8"
-          onClick={handleInfoClose}
-        >
-          <Close />
-        </button>
-        <div className="h-full flex flex-col items-center justify-center max-w-[390px] mx-auto pt-9 text-primary">
-          <div className="flex-1 w-full border sm:text-base text-sm">
-            <h1 className="text-center sm:text-3xl text-2xl rtl">איך לשחק?</h1>
-            <ul className="list-disc pl-5 block sm:text-base text-sm">
-              <li className="mt-6 mb-2 rtl">יש לך 6 ניחושים לנחש את המילה הנכונה</li>
-              <li className="mb-2 rtl">אפשר לנחש כל מילה שמופיעה ברשימת המילים של המשחק</li>
-              <li className="mb-2 rtl">
-                אחרי כל ניחוש, כל אות תיצבע בירוק, צהוב או אפור.
-              </li>
-            </ul>
-            <div className="mb-3 mt-8 flex items-center rtl">
-              <span className="nm-inset-n-green text-gray-50 inline-flex items-center justify-center text-3x w-10 h-10 rounded-full">
-                א
-              </span>
-              <span className="mx-2">=</span>
-              <span>אות נכונה, במיקום הנכון.</span>
-            </div>
-            <div className="mb-3 rtl">
-              <span className="nm-inset-yellow-500 text-gray-50 inline-flex items-center justify-center text-3x w-10 h-10 rounded-full">
-                א
-              </span>
-              <span className="mx-2">=</span>
-              <span>אות נכונה, במיקום לא נכון.</span>
-            </div>
-            <div className="mb-3 rtl">
-              <span className="nm-inset-n-gray text-gray-50 inline-flex items-center justify-center text-3x w-10 h-10 rounded-full">
-                א
-              </span>
-              <span className="mx-2">=</span>
-              <span>האות לא מופיעה במילה.</span>
-            </div>
-
-
-          </div>
-          <div className="flex justify-center sm:text-base text-sm">
-            <a
-              className="ml-[6px] rounded-full h-5 w-5 sm:h-6 sm:w-9"
-              href="https://github.com/aviv57/word-master"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github />
-            </a>
-            <span>הקוד של המשחק זמין ב</span>
-          </div>
-        </div>
-      </Modal>
     </div>
   )
-}
-
-const customStyles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'hsl(231, 16%, 92%)',
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    height: 'calc(100% - 2rem)',
-    width: 'calc(100% - 2rem)',
-    backgroundColor: 'hsl(231, 16%, 92%)',
-    boxShadow:
-      '0.2em 0.2em calc(0.2em * 2) #A3A7BD, calc(0.2em * -1) calc(0.2em * -1) calc(0.2em * 2) #FFFFFF',
-    border: 'none',
-    borderRadius: '1rem',
-    maxWidth: '475px',
-    maxHeight: '650px',
-    position: 'relative',
-  },
 }
 
 export default App
