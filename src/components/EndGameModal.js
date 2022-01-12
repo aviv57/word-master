@@ -43,7 +43,7 @@ export const EndGameModal = ({
               <img src={Success} alt="success" height="auto" width="auto" />
               <h1 className=" text-3xl rtl">כל הכבוד!</h1>
               <p className="mt-6 rtl">
-                רצך נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
+                רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
               </p>
               <p className="rtl">
                 הרצף הכי ארוך: <strong>{longestStreak}</strong>
@@ -59,7 +59,7 @@ export const EndGameModal = ({
                   המילה הייתה: <strong>{answer}</strong>
                 </p>
                 <p className="mt-6 text-base rtl">
-                  רצך נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
+                  רצף נוכחי: <strong>{currentStreak}</strong> {currentStreak > 4 && '🔥'}
                 </p>
                 <p className="text-base rtl">
                   הרצף הכי ארוך: <strong>{longestStreak}</strong>
