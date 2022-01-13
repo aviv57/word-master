@@ -51,11 +51,11 @@ const Keyboard = ({ letterStatuses, addLetter, onEnterPress, onDeletePress, game
   return (
     <div className="w-full flex flex-col items-center mb-3 select-none">
       {keyboardLetters.map((row, idx) => (
-        <div key={idx} className="w-full flex justify-center my-[5px]">
+        <div key={idx} className={idx === 2 ? "w-full flex justify-center mt-[5px] mb-[50px]" : "w-full flex justify-center my-[5px]"}>
           {idx === 2 && (
             <button
               onClick={onEnterPress}
-              className="h-10 xxs:h-14 w-12 px-1 text-xs font-medium mx-[3.5px] rounded nm-flat-background-sm dark:nm-flat-background-dark-sm text-primary dark:text-primary-dark"
+              className="h-10 xxs:h-10 w-12 px-1 text-xs font-medium mx-[3.5px] rounded nm-flat-background-sm dark:nm-flat-background-dark-sm text-primary dark:text-primary-dark"
             >
               ENTER
             </button>
@@ -64,7 +64,7 @@ const Keyboard = ({ letterStatuses, addLetter, onEnterPress, onDeletePress, game
             <button
               onClick={() => onKeyButtonPress(letter)}
               key={letter}
-              className="h-10 xxs:h-14 w-[2rem] sm:w-10 mx-[3.5px] text-sm font-medium rounded-[4px] nm-flat-background-sm dark:nm-flat-background-dark-sm"
+              className="h-10 xxs:h-10 w-[2rem] sm:w-10 mx-[3.5px] text-sm font-medium rounded-[4px] nm-flat-background-sm dark:nm-flat-background-dark-sm"
             >
               <div
                 className={`h-full w-full rounded-[3px] flex items-center justify-center ${getKeyStyle(
@@ -78,7 +78,7 @@ const Keyboard = ({ letterStatuses, addLetter, onEnterPress, onDeletePress, game
           {idx === 2 && (
             <button
               onClick={onDeletePress}
-              className="h-10 xxs:h-14 w-12 flex items-center justify-center nm-flat-background-sm dark:nm-flat-background-dark-sm text-primary dark:text-primary-dark mx-[3.5px] text-sm  rounded"
+              className="h-10 xxs:h-10 w-12 flex items-center justify-center nm-flat-background-sm dark:nm-flat-background-dark-sm text-primary dark:text-primary-dark mx-[3.5px] text-sm  rounded"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
