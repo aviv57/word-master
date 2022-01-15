@@ -17,8 +17,8 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
         <div className="flex-1 w-full sm:text-base text-sm">
           <h1 className="text-center sm:text-3xl text-2xl rtl">איך לשחק?</h1>
           <ul className="list-disc pl-5 block sm:text-base text-sm">
-            <li className="mt-6 mb-2 rtl">יש לך 6 ניחושים לנחש את המילה הנכונה</li>
-            <li className="mb-2 rtl">אפשר לנחש כל מילה שמופיעה ברשימת המילים של המשחק</li>
+            <li className="mt-6 mb-2 rtl">יש לך 6 ניחושים לנחש את המילה הנכונה.</li>
+            <li className="mb-2 rtl">אפשר לנחש כל מילה שמופיעה ברשימת המילים של המשחק.</li>
             <li className="mb-2 rtl">
               אחרי כל ניחוש, כל אות תיצבע בירוק, צהוב או אפור.
             </li>            
