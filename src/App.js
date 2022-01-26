@@ -79,10 +79,10 @@ function App() {
   const [longestStreak, setLongestStreak] = useLocalStorage('longest-streak', 0)
   const streakUpdated = useRef(false)
   const [modalIsOpen, setIsOpen] = useState(false)
-  const [firstTime, setFirstTime] = useLocalStorage('first-time', true)
+  const [firstTime, setFirstTime] = useState(true)//useLocalStorage('first-time', true)
   const [infoModalIsOpen, setInfoModalIsOpen] = useState(firstTime)
   const [settingsModalIsOpen, setSettingsModalIsOpen] = useState(false)
-
+  
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
   const handleInfoClose = () => {
