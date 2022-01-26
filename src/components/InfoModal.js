@@ -43,19 +43,24 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
             </span>
             <span className="mx-2">=</span>
             <span>האות לא מופיעה במילה.</span>
+          </div>          
+        </div>
+        <div className="absolute bottom-4 right-12 flex-col max-w-[390px] mx-auto">
+          <div className="flex sm:text-base text-sm rtl">
+            <span>הקוד של המשחק זמין ב</span>
+            <a
+              className="ml-[6px] rounded-full h-5 w-5 sm:h-6 sm:w-9"
+              href="https://github.com/aviv57/word-master"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github />
+            </a>
           </div>
-        </div>
-        <div className="flex justify-center sm:text-base text-sm">
-          <a
-            className="ml-[6px] rounded-full h-5 w-5 sm:h-6 sm:w-9"
-            href="https://github.com/aviv57/word-master"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Github />
-          </a>
-          <span>הקוד של המשחק זמין ב</span>
-        </div>
+          <div>
+            ניתן לשלוח הצעות למילים ורעיונות לשיפור <a href="https://forms.gle/D39QL2HeYVPFgQSt8" className="underline text-sky-400">כאן</a>
+          </div> 
+        </div>       
       </div>
     </div>
   </Modal>
