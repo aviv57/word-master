@@ -57,8 +57,10 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
               <Github />
             </a>
           </div>
-          <div>
-            ניתן לשלוח הצעות למילים ורעיונות לשיפור <a href="https://forms.gle/D39QL2HeYVPFgQSt8" className="underline text-sky-400">כאן</a>
+          <div className="flex sm:text-base text-sm rtl">
+            <span>
+              ניתן לשלוח הצעות למילים ורעיונות לשיפור <a href="https://forms.gle/D39QL2HeYVPFgQSt8" className="underline text-sky-400">כאן</a>
+            </span>
           </div> 
         </div>       
       </div>
