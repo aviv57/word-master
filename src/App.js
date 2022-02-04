@@ -41,7 +41,7 @@ const invertedFinalFormLetters = invert(finalFormLetters)
 
 const getRandomAnswer = () => {
   const randomIndex = Math.floor(Math.random() * answers.length)
-  return reverse(answers[randomIndex].toUpperCase())
+  return reverse(answers[randomIndex])
 }
 
 function App() {
@@ -155,7 +155,14 @@ function App() {
 
   const isValidWord = (word) => {
     if (word.length < 5) return false
-    return words[reverse(word.toLowerCase())]
+    let finalFormWord = '';
+    let lastLetter = word[0]
+    if (lastLetter in invertedFinalFormLetters)
+    {
+      finalFormWord = invertedFinalFormLetters[lastLetter] + word.slice(1, 5)
+    }
+    
+    return words[reverse(word)] || words[reverse(finalFormWord)]
   }
 
   const onEnterPress = () => {
