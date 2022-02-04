@@ -62,6 +62,11 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
               ניתן לשלוח הצעות למילים ורעיונות לשיפור <a href="https://forms.gle/D39QL2HeYVPFgQSt8" className="underline text-sky-400">כאן</a>
             </span>
           </div> 
+          <div className="flex text-[10px] rtl">
+            <span>
+              (תאריך עדכון אחרון 04/02/2022)
+            </span>
+          </div>           
         </div>       
       </div>
     </div>
