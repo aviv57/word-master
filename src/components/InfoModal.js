@@ -21,7 +21,7 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
             <li className="mb-2 rtl">אפשר לנחש כל מילה שמופיעה ברשימת המילים של המשחק.</li>
             <li className="mb-2 rtl">
               אחרי כל ניחוש, כל אות תיצבע בירוק, צהוב או אפור.
-            </li>            
+            </li>
           </ul>
           <div className="mb-3 mt-8 flex items-center rtl">
             <span className="nm-inset-n-green text-gray-50 inline-flex items-center justify-center text-3x w-10 h-10 rounded-full">
@@ -43,7 +43,7 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
             </span>
             <span className="mx-2">=</span>
             <span>האות לא מופיעה במילה.</span>
-          </div>          
+          </div>
         </div>
         <div className="absolute bottom-4 right-12 flex-col max-w-[390px] mx-auto">
           <div className="flex sm:text-base text-sm rtl">
@@ -61,13 +61,13 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
             <span>
               ניתן לשלוח הצעות למילים ורעיונות לשיפור <a href="https://forms.gle/D39QL2HeYVPFgQSt8" className="underline text-sky-400">כאן</a>
             </span>
-          </div> 
+          </div>
           <div className="flex text-[10px] rtl">
             <span>
-              (תאריך עדכון אחרון 18/03/2022)
+              (תאריך עדכון אחרון 04/06/2022)
             </span>
-          </div>           
-        </div>       
+          </div>
+        </div>
       </div>
     </div>
   </Modal>
