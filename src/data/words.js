@@ -1,4 +1,6 @@
-const words = {
+import answers from './answers'
+
+let words_a = {
 "אאבזר": true,
 "אאבחן": true,
 "אאבטח": true,
@@ -64773,5 +64775,11 @@ const words = {
 "תתשאל": true,
 "תתשנה": true,
 }
+
+let words = { ...words_a}
+
+for (const word of answers) {
+    words[word] = true;
+  }
 
 export default words
