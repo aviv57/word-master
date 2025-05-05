@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/word-master/static/css/main.4d137e42.css",
-    "main.js": "/word-master/static/js/main.8e7973ec.js",
-    "static/media/Cross.png": "/word-master/static/media/Cross.cbf77228e847522eff11.png",
-    "static/media/Success.png": "/word-master/static/media/Success.df533be8f86a57bc5946.png",
-    "static/media/Ranade-Variable.ttf": "/word-master/static/media/Ranade-Variable.bb177f94a709e8e8f396.ttf",
-    "index.html": "/word-master/index.html",
-    "static/media/Github.svg": "/word-master/static/media/Github.d27679b8d9e85b12213b6a7e8501b302.svg",
-    "static/media/Settings.svg": "/word-master/static/media/Settings.f331175cf3c7be8e472616cfa44ad022.svg",
-    "static/media/Info.svg": "/word-master/static/media/Info.25fc81bdb1513b3bbdd73954d273f9a0.svg",
-    "static/media/Close.svg": "/word-master/static/media/Close.9b76c69e64ab581876fc79bad92c06d6.svg",
-    "main.4d137e42.css.map": "/word-master/static/css/main.4d137e42.css.map",
-    "main.8e7973ec.js.map": "/word-master/static/js/main.8e7973ec.js.map"
+    "main.css": "/static/css/main.eef9692b.css",
+    "main.js": "/static/js/main.155d462a.js",
+    "static/media/Cross.png": "/static/media/Cross.cbf77228e847522eff11.png",
+    "static/media/Success.png": "/static/media/Success.df533be8f86a57bc5946.png",
+    "static/media/Ranade-Variable.ttf": "/static/media/Ranade-Variable.bb177f94a709e8e8f396.ttf",
+    "index.html": "/index.html",
+    "static/media/Github.svg": "/static/media/Github.d27679b8d9e85b12213b6a7e8501b302.svg",
+    "static/media/Settings.svg": "/static/media/Settings.f331175cf3c7be8e472616cfa44ad022.svg",
+    "static/media/Info.svg": "/static/media/Info.25fc81bdb1513b3bbdd73954d273f9a0.svg",
+    "static/media/Close.svg": "/static/media/Close.9b76c69e64ab581876fc79bad92c06d6.svg",
+    "main.eef9692b.css.map": "/static/css/main.eef9692b.css.map",
+    "main.155d462a.js.map": "/static/js/main.155d462a.js.map"
   },
   "entrypoints": [
-    "static/css/main.4d137e42.css",
-    "static/js/main.8e7973ec.js"
+    "static/css/main.eef9692b.css",
+    "static/js/main.155d462a.js"
   ]
 }
