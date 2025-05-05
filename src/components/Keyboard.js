@@ -57,7 +57,7 @@ const Keyboard = ({ letterStatuses, addLetter, onEnterPress, onDeletePress, game
               onClick={onEnterPress}
               className="h-10 xxs:h-10 w-12 px-1 text-xs font-medium mx-[3.5px] rounded nm-flat-background-sm dark:nm-flat-background-dark-sm text-primary dark:text-primary-dark"
             >
-              ENTER
+              לבדוק ניחוש
             </button>
           )}
           {row.map((letter) => (
