@@ -64,7 +64,7 @@ export const InfoModal = ({ isOpen, handleClose, darkMode, styles }) => (
           </div>
           <div className="flex text-[10px] rtl">
             <span>
-              (תאריך עדכון אחרון 05/05/2025)
+              (תאריך עדכון אחרון 01/06/2025)
             </span>
           </div>
         </div>
