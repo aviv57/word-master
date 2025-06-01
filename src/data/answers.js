@@ -9,7 +9,11 @@ const answers = [...answers_base,
   'חומצה',
   'סביבה',
   'חידון',
-  'הפסקה',    
+  'הפסקה',
+  'שירים',
+  'מוזרה',
+  'מחיקה',
+  'הולכת',
 ]
 
 export default answers
